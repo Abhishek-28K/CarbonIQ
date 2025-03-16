@@ -92,6 +92,12 @@
                             <p><strong>Nearby Public Transport:</strong> {{ chats.Nearby_Bus_Stops }}</p>
                         </div>
                         <div class="chat-column">
+                            <!-- Suggested Vehicles Section -->
+                            <div class="recommended-vehicles">
+                                <h3>Recommended Green Vehicles</h3>
+                                <p><strong>Best Vehicle 1:</strong> {{ best_vehicle_1 }}</p>
+                                <p><strong>Best Vehicle 2:</strong> {{ best_vehicle_2 }}</p>
+                            </div>
                             <div class="carbon-footprint">
                                 <p><strong>Carbon Footprint:</strong></p>
                                 {% for mode, footprint in chats.carbon_footprint.items %}
@@ -99,12 +105,6 @@
                                 {% endfor %}
                             </div>
                             
-                            <!-- Suggested Vehicles Section -->
-                            <div class="recommended-vehicles">
-                                <h3>Recommended Green Vehicles</h3>
-                                <p><strong>Best Vehicle 1:</strong> {{ best_vehicle_1 }}</p>
-                                <p><strong>Best Vehicle 2:</strong> {{ best_vehicle_2 }}</p>
-                            </div>
                         </div>
                     </div>
                 </div>
