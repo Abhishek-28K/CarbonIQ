@@ -1,7 +1,7 @@
 /* Advanced General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background: 
+    background:
         linear-gradient(120deg, rgba(17, 139, 68, 0.1), transparent 70%),
         linear-gradient(240deg, rgba(71, 182, 73, 0.1), transparent 70%),
         linear-gradient(135deg, #f4f7f6, #e0e5ec);
@@ -20,6 +20,7 @@ html {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: 30px;
     padding: 30px;
     position: relative;
     animation: fadeIn 1s ease-in-out;
@@ -31,10 +32,10 @@ html {
 }
 
 /* Enhanced Title Styles */
-h1 {
+.container h1 {
     text-align: center;
     color: #2c3e50;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 30px;
     position: relative;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -71,7 +72,7 @@ h2.graph-title {
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     animation: slideInUp 1s ease-in-out;
-    box-shadow: 
+    box-shadow:
         8px 8px 16px rgba(209, 209, 209, 0.5),
         -8px -8px 16px rgba(255, 255, 255, 0.8);
     overflow: hidden;
@@ -108,7 +109,7 @@ h2.graph-title {
 .stat-card:hover {
     transform: translateY(-10px) scale(1.02);
     background: linear-gradient(135deg, #118B44, #47B649);
-    box-shadow: 
+    box-shadow:
         0 15px 30px rgba(17, 139, 68, 0.2),
         0 8px 16px rgba(17, 139, 68, 0.1);
 }
@@ -143,7 +144,7 @@ h2.graph-title {
 .dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 40px;
 }
 
@@ -213,6 +214,9 @@ canvas {
         margin: 15px;
         padding: 20px;
     }
+    .container h1{
+        margin-top: 2rem
+    };
 
     .stats-container {
         gap: 20px;
@@ -231,7 +235,7 @@ canvas {
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     h2.graph-title {
@@ -265,4 +269,216 @@ canvas {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, #0d6632, #3a9f3c);
+}
+
+
+
+
+#row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px; /* Gap between the form and chats */
+    padding: 20px;
+}
+
+/* Form Container Styles */
+/* Super Container */
+.supercontainer {
+    display: flex;
+    flex-direction: column; /* Default: Stacked layout */
+    gap: 0; /* No gap, using a white border instead */
+    margin: 150px; /* Moves container away from screen edges */
+    background-color: #58ab90; /* Same as sub-containers */
+    padding: 20px; /* Inner spacing for content */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Shared Container Styles */
+.form-container,
+.chats {
+    background-color: #58ab90; /* Same green background */
+    padding: 20px;
+    border-radius: 0; /* Remove border-radius to ensure seamless connection */
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form-specific styles */
+.form-container {
+    max-width: 100%;
+    color: #E5F6DF; /* Light green text */
+    position: relative;
+    flex-shrink: 0;
+    border-bottom: 2px solid white; /* White separator */
+}
+
+/* Chat-specific styles */
+.chats {
+    flex-grow: 1;
+    min-width: 0;
+    font-size: 16px;
+    color: #E5F6DF; /* Light green text for consistency */
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 768px) {
+    .supercontainer {
+        flex-direction: column; /* Stacked layout for smaller screens */
+        margin: 20px; /* Reduce margin for smaller screens */
+    }
+
+    .form-container {
+        border-bottom: 2px solid white; /* White separator when stacked */
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .supercontainer {
+        flex-direction: row; /* Side-by-side layout for larger screens */
+        align-items: stretch;
+    }
+
+    .form-container {
+        border-right: 2px solid white; /* White vertical separator when side-by-side */
+        border-bottom: none; /* Remove bottom border for large screens */
+    }
+}
+
+
+
+
+
+/* Scrollable Chat Entries */
+.chat-entries {
+    overflow-y: auto;
+    height: 100%; /* Make it take the full height of the chats container */
+    padding-right: 10px; /* Space for scrollbar */
+}
+
+/* Chat Entry Styles */
+.chat-entry {
+    background-color: #58ab90; /* Dark green background */
+    color: #E5F6DF; /* Light green text */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px; /* Gap between chat entries */
+}
+
+/* Chat Details Container */
+.chat-details {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Details Row */
+.chat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Chat Details Column */
+.chat-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Carbon Footprint Container */
+.carbon-footprint {
+    margin-top: 10px;
+}
+
+/* Search Date and Time */
+.search-date-time {
+    font-size: 12px;
+    color: #aaa;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+/* Form Styles */
+.form-container h2 {
+    text-align: center;
+    color: #E5F6DF; /* Light green text */
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #E5F6DF; /* Light green text */
+    font-weight: bold;
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 4px;
+    background-color: #fff; /* White background */
+    transition: all 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container select:focus,
+.form-container button:focus {
+    outline: none;
+    border-color: #00a5b5; /* Teal border on focus */
+    box-shadow: 0 0 5px rgba(0, 165, 181, 0.5);
+}
+
+.form-container input::placeholder,
+.form-container select {
+    color: #aaa; /* Light grey placeholder text */
+}
+
+.form-container button {
+    background-color: #E5F6DF; /* Light green background */
+    color: #00563B; /* Dark green text */
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-container button:hover {
+    background-color: #f4f9f4; /* Very light green background */
+    color: #00563B; /* Dark green text */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Autocomplete Results */
+.autocomplete-results {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: calc(100% - 20px);
+    background-color: #fff; /* White background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none; /* Hidden by default */
+}
+
+.autocomplete-results li {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #00563B;
+}
+
+.autocomplete-results li:hover {
+    background-color: #e0f7fa; /* Light cyan background on hover */
 }

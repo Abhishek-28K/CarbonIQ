@@ -1,5 +1,8 @@
+# Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
+import random
+from datetime import date
 
 class TripLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="trips")
@@ -26,3 +29,45 @@ class TripLog(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.source_address} to {self.destination_address} ({self.date})"
+    
+
+
+class Chat(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link to the user
+    source_lat = models.FloatField()
+    source_lng = models.FloatField()
+    dest_lat = models.FloatField()
+    dest_lng = models.FloatField()
+    source_address = models.CharField(max_length=255)
+    destination_address = models.CharField(max_length=255)
+    search_date = models.DateField()
+    search_time = models.TimeField()
+    distance = models.FloatField()
+    duration = models.FloatField()
+    carbon_footprint = models.JSONField()  # Store carbon footprint data in JSON format
+    Nearby_Bus_Stops = models.CharField(max_length=300)
+    def __str__(self):
+        return f"Trip from {self.source_address} to {self.destination_address} on {self.search_date}"
+    
+
+
+class Challenge(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    description = models.TextField()
+    points = models.IntegerField(default=10)
+    created_at = models.DateTimeField(auto_now_add=True)  # ✅ This will automatically set the timestamp
+
+    def __str__(self):
+        return self.title
+
+class UserChallenge(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
+    assigned_date = models.DateField(default=date.today)
+    completed = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('user', 'assigned_date')  # Ensure one challenge per day
+
+    def __str__(self):
+        return f"{self.user.username} - {self.challenge.title} ({self.assigned_date})"

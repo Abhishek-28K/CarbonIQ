@@ -1,41 +1,378 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CarbonIQ{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo1.png' %}">
+
+    <!-- CSS Libraries -->
+    <link href="{% static 'css/chatbot.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mainbase.css' %}" rel="stylesheet">
+    <link href="{% static 'css/landingpage.css' %}" rel="stylesheet">
+
+       <!-- Bootstrap CSS -->
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery (for autocomplete if needed) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.min.js"></script>
-    <link href="{% static 'css/mainbase.css'%}" rel="stylesheet">
-    
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.min.js"></script>
+
+
+    <style>
+        :root {
+            --green-primary: #00563B;
+            --green-accent: #7fcd65;
+            --text-color: #E5F6DF;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            max-width: 100vw;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            /* padding: 20px 20px; */
+            background: linear-gradient(to bottom, #7fcd65 0%, transparent 100%);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--green-primary);
+            padding: 15px 40px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .navbar .logo img {
+            height: 50px;
+        }
+
+        .navbar h1 {
+            color: var(--text-color);
+            margin-left: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            margin-right: 0.3rem;
+        }
+
+        .nav-links ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin: 0 5px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--green-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Nav */
+        .mobile-menu {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: var(--green-accent);
+            display: flex;
+            flex-direction: column;
+            padding-top: 70px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            padding: 15px 20px;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            background: var(--green-accent);
+            padding-left: 10px;
+        }
+
+        /* Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+                /* Streak & Coins Box Styling (Fixed at Top Right Below Navbar) */
+                .streak-coins-box {
+            position: fixed;
+            top: 80px;
+            /* Adjusted to appear below navbar */
+            right: 20px;
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .streak-coins-box img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+            .streak-coins-box {
+                top: 80px;
+            }
+        }
+
+
+
+    </style>
+
     {% block extra_head %}{% endblock %}
 </head>
+
 <body>
+
+    <!-- Navbar -->
     <header class="navbar">
         <div class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="CarbonIQ Logo">
-            <h1>CarbonIQ</h1>
+            <a href="{% url 'homepage' %}">
+                <img src="{% static 'images/logo1.png' %}" alt="CarbonIQ Logo">
+            </a>
+            <h1><a href="{% url 'homepage' %}" style="text-decoration: none; color: inherit;">CarbonIQ</a></h1>
         </div>
-        <div class="nav-links">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav class="nav-links">
             <ul>
-                <li><a href="{% url 'homepage' %}"><h3>Home</h3></a></li>
-                <li><a href="{% url 'logtrip' %}"><h3>LogTrip</h3></a></li>
-                <li><a href="{% url 'leaderboards' %}"><h3>Leaderboards</h3></a></li>
-                <li><a href="{% url 'view_profile' user_id=user.id %}"><h3>Profile</h3></a></li>
-                <li><a href="{% url 'logout' %}"><h3>Logout</h3></a></li>
+                <li><a href="{% url 'homepage' %}">
+                        <p>Home</p>
+                    </a></li>
+                <li><a href="{% url 'logtrip' %}">
+                        <p>TripLog</p>
+                    </a></li>
+                <li><a href="{% url 'leaderboards' %}">
+                        <p>Leaderboard</p>
+                    </a></li>
+                <li><a href="{% url 'challenge' %}">
+                        <p>Challenges</p>
+                    </a></li>
+                <li><a href="{% url 'redeem' %}">
+                        <p>Redeem</p>
+                    </a></li>
+                <li><a href="{% url 'view_profile' user_id=user.id %}">
+                        <p>Profile</p>
+                    </a></li>
+                <li><a href="{% url 'logout' %}">
+                        <p>Logout</p>
+                    </a></li>
             </ul>
-        </div>
+        </nav>
     </header>
 
+    <!-- Mobile Menu (Hidden by Default) -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li><a href="{% url 'logtrip' %}">TripLog</a></li>
+            <li><a href="{% url 'leaderboards' %}">Leaderboard</a></li>
+            <li><a href="{% url 'challenge' %}">Challenges</a></li>
+            <li><a href="{% url 'view_profile' user_id=user.id %}">Profile</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Streak & Coins Box (Fixed at Top Right Below Navbar) -->
+    <div class="streak-coins-box" id="userStats">
+        <img src="{% static 'images/leaf.png' %}" alt="Streak">
+        <span id="streakCount">--</span> Days
+        <img src="{% static 'images/coin.png' %}" alt="Coins">
+        <span id="coinCount">--</span>
+    </div>
+
+    <!-- Main Content -->
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <!-- Chatbot Floating Button -->
+    <button class="fab"
+onclick="toggleChatbot()">💬</button>
+
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">
+            <span>Greenbot</span>
+            <button onclick="toggleChatbot()">✖</button>
+        </div>
+        <div class="chatbot-body" id="chatBody">
+            <p><strong>GreenBot:</strong> Hello! Myself GreenBot, your personal green trip advisor . How can I assist
+                you?</p>
+        </div>
+        <div class="chatbot-footer">
+            <input type="text" id="userInput" placeholder="Ex:- I want to travel 5km..."
+                onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()" style="padding:10px;width:50px;font-size:20px">▷</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer style="background-color: #00563B; color: #E5F6DF; padding: 20px; text-align: center;">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p style="margin: 0;">&copy; 2024 CarbonIQ. All rights reserved.</p>
+            <p style="margin: 0;">&copy; 2025 CarbonIQ. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Async JavaScript to Fetch Streak & Coins -->
+    <script>
+
+        function toggleMenu() {
+            document.getElementById("mobileMenu").classList.toggle("active");
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+        document.addEventListener("DOMContentLoaded", async function () {
+            const streakElement = document.getElementById("streakCount");
+            const coinElement = document.getElementById("coinCount");
+
+            try {
+                const response = await fetch("{% url 'get_user_stats' %}");
+                if (!response.ok) throw new Error("Failed to fetch data");
+
+                const data = await response.json();
+                if (data.streak !== undefined && data.coins !== undefined) {
+                    streakElement.textContent = data.streak;
+                    coinElement.textContent = data.coins;
+                }
+            } catch (error) {
+                console.error("Error fetching user stats:", error);
+            }
+        });
+
+        function toggleChatbot() {
+            const chatbot = document.getElementById("chatbot");
+            chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+        }
+
+        function handleEnter(event) {
+            if (event.key == "Enter") {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const inputField = document.getElementById("userInput");
+            const chatBody = document.getElementById("chatBody");
+            const userMessage = inputField.value.trim();
+
+            if (userMessage !== "") {
+                chatBody.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+                inputField.value = "";
+
+                try {
+                    const response = await fetch("/chatbot-response/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ message: userMessage })
+                    });
+
+                    const data = await response.json();
+                    chatBody.innerHTML += `<p><strong>GreenBot:</strong> ${data.response || "No response"} 😊</p>`;
+                } catch (error) {
+                    chatBody.innerHTML += `<p><strong>GreenBot:</strong> Error fetching response ❌</p>`;
+                }
+
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+    </script>
+
     {% block extra_scripts %}{% endblock %}
 </body>
+
 </html>

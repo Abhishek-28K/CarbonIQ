@@ -2,10 +2,9 @@
 .container {
     max-width: 100%;
     margin: auto;
-    background-color: #ffffff;
+    background-color: var(--green-light);
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 86, 59, 0.08);
-    border: 1px solid #c8e6d7;
     padding: 20px;
 }
 
@@ -16,7 +15,6 @@
     gap: 20px;
     justify-content: space-between;
     align-items: flex-start;
-    width: 100%;
 }
 
 /* Ensure left column stays on left */
@@ -33,6 +31,7 @@
     max-width: 66%;
     box-sizing: border-box;
     order: 2; /* Explicitly set order to ensure it's second */
+    border-radius: 16px;
 }
 
 /* Update the responsive behavior to maintain left/right positions when possible */
@@ -40,7 +39,7 @@
     .row {
         flex-direction: column; /* Stack on smaller screens */
     }
-    
+
     .col-md-4, .col-md-8 {
         flex-basis: 100%;
         max-width: 100%;
@@ -68,10 +67,9 @@
 .form-container {
     background-color: #ffffff;
     border-radius: 12px;
-    padding: 50px;
+    padding: 20px 50px;
     box-shadow: 0 8px 16px rgba(0, 86, 59, 0.08);
-    max-width: 100%;
-    margin: auto;
+    margin:  0 auto;
     border: 1px solid #c8e6d7;
 }
 
@@ -115,7 +113,7 @@ select:focus {
 }
 
 /* Button */
-button {
+.btn {
     width: 100%;
     padding: 14px; /* More padding */
     background: linear-gradient(135deg, #00563B, #446b5d);
@@ -129,7 +127,7 @@ button {
     letter-spacing: 0.5px; /* Slight letter spacing for buttons */
 }
 
-button:hover {
+.btn:hover {
     background: linear-gradient(135deg, #00563B, #00563B);
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 86, 59, 0.15);
@@ -140,6 +138,11 @@ button:active {
     box-shadow: 0 2px 6px rgba(0, 86, 59, 0.1);
 }
 
+.trip-container-bada{
+    box-shadow: 0px 4px 12px rgba(0, 86, 59, 0.1);
+    background-color: white;
+}
+
 /* Trip Log Section */
 .trip-log-container {
     height: 450px; /* Fixed height for scroll */
@@ -147,7 +150,6 @@ button:active {
     background: #ffffff;
     padding: 15px;
     border-radius: 12px;
-    border: 1px solid #c8e6d7;
     box-shadow: 0px 4px 12px rgba(0, 86, 59, 0.1);
 }
 
@@ -197,7 +199,6 @@ button:active {
     font-size: 14px;
     color: #555;
     flex-wrap: wrap;
-    border-bottom: 1px solid rgba(0, 86, 59, 0.05); /* Subtle separators */
 }
 
 .trip-summary .trip-row span {
@@ -216,11 +217,7 @@ button:active {
         gap: 5px;
     }
 }
-/* Autocomplete */
-.autocomplete-container {
-    position: relative;
-    width: 100%;
-}
+
 
 .autocomplete-results {
     list-style: none;

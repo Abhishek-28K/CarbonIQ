@@ -21,7 +21,7 @@ body {
 
 /* Enhanced Navbar */
 .navbar {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+    background: linear-gradient(to bottom, #7fcd65 0%, transparent 100%);
     padding: 20px 0;
     transition: all 0.3s ease;
 }
@@ -36,8 +36,12 @@ body {
     color: var(--text-color);
     font-size: 2.5rem;
     font-weight: 700;
-    margin-left: 40px;
+    margin-left: 4px;
     letter-spacing: -1px;
+}
+
+.navbar-logo{
+    margin-left: 40px;
 }
 
 .navbar-brand:hover {
@@ -83,6 +87,7 @@ body {
 }
 
 .video-container video {
+    opacity: 1;
     position: absolute;
     top: 0;
     left: 0;
@@ -104,46 +109,20 @@ body {
 }
 
 .main-heading {
-    font-size: 3rem;
-    font-weight: 700;
+    font-size: 1.5rem;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-style: italic;
+}
+
+.title-color {
+    color: rgb(246, 246, 111);
 }
 
 .welcome-text {
-    font-size: 3.5rem;
-    font-weight: 500;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-/* Hero Stats */
-.hero-stats {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin-top: 60px; /* Space between welcome text and stats */
-}
-
-.stat-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px 40px;
-    border-radius: 15px;
-    color: white;
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-10px);
-}
-
-.stat-number {
-    font-size: 2.5rem;
+    font-size: 6rem;
     font-weight: 700;
-    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 /* App Button */
@@ -179,7 +158,7 @@ body {
     }
 
     .welcome-text {
-        font-size: 2rem;
+        font-size: 4rem;
     }
 
     .hero-stats {
@@ -527,7 +506,7 @@ color: var(--green-primary);
 
 /* Footer */
 .footer {
-    background-color: var(--green-primary);
+    background-color: black;
     color: white;
     text-align: center;
     padding: 30px 0;
@@ -570,9 +549,9 @@ color: var(--green-primary);
     .main-heading {
         font-size: 3rem;
     }
-    
+
     .welcome-text {
-        font-size: 2rem;
+        font-size: 5rem;
     }
 }
 
@@ -580,18 +559,18 @@ color: var(--green-primary);
     .navbar-brand {
         margin-left: 20px;
     }
-    
+
     .hero-stats {
         flex-direction: column;
         align-items: center;
         bottom: 200px;
         gap: 20px;
     }
-    
+
     .stat-card {
         padding: 15px 30px;
     }
-    
+
     .about-text {
         text-align: center;
         margin-top: 40px;
@@ -600,17 +579,17 @@ color: var(--green-primary);
 
 @media (max-width: 768px) {
     .main-heading {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
-    
+
     .welcome-text {
-        font-size: 1.8rem;
+        font-size: 3rem;
     }
-    
+
     .section {
         padding: 60px 0;
     }
-    
+
     .feature-card {
         margin-bottom: 30px;
     }
@@ -618,13 +597,13 @@ color: var(--green-primary);
 
 @media (max-width: 576px) {
     .main-heading {
+        font-size: 1.3rem;
+    }
+
+    .welcome-text {
         font-size: 2rem;
     }
-    
-    .welcome-text {
-        font-size: 1.5rem;
-    }
-    
+
     .app-button {
         padding: 12px 30px;
         font-size: 1rem;
